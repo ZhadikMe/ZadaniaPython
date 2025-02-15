@@ -4,50 +4,63 @@ class Book:
         self.__name = name
         self.__author = author
 
-    def get_name(self):
+    @property
+    def name(self):
         return self.__name
 
-    def get_author(self):
+    @name.setter
+    def name(self, value):
+        self.__name = value
+
+    @property
+    def author(self):
         return self.__author
 
+    @author.setter
+    def author(self, value):
+        self.__author = value
+
     def __str__(self):
-        return f"Книга {self.get_name()}. Автор {self.get_author()}"
+        return f"Книга {self.name}. Автор {self.author}"
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(name={self.get_name()!r}, author={self.get_author()!r})"
+        return f"{self.__class__.__name__}(name={self.name!r}, author={self.author!r})"
 
 class PaperBook(Book):
     def __init__(self, name: str, author: str, pages: int):
         super().__init__(name, author)
-        self.set_pages(pages)
+        self.pages = pages
 
-    def get_pages(self):
+    @property
+    def pages(self):
         return self.__pages
 
-    def set_pages(self, value):
+    @pages.setter
+    def pages(self, value):
         if not isinstance(value, int) or value <= 0:
             raise ValueError("Количество страниц должно быть положительным целым числом")
         self.__pages = value
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(name={self.get_name()!r}, author={self.get_author()!r}, pages={self.get_pages()!r})"
+        return f"{self.__class__.__name__}(name={self.name!r}, author={self.author!r}, pages={self.pages!r})"
 
 class AudioBook(Book):
     def __init__(self, name: str, author: str, duration: float):
         super().__init__(name, author)
-        self.set_duration(duration)
+        self.duration = duration
 
-    def get_duration(self):
+    @property
+    def duration(self):
         return self.__duration
 
-    def set_duration(self, value):
+    @duration.setter
+    def duration(self, value):
         if not isinstance(value, (int, float)) or value <= 0:
             raise ValueError("Продолжительность должна быть положительным числом")
         self.__duration = value
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(name={self.get_name()!r}, author={self.get_author()!r}, duration={self.get_duration()!r})"
-
+        return f"{self.__class__.__name__}(name={self.name!r}, author={self.author!r}, duration={self.duration!r})"
 
 BOOK_DATABASE = [
     PaperBook(name="Война и мир", author="Лев Толстой", pages=1225),
@@ -55,7 +68,6 @@ BOOK_DATABASE = [
     PaperBook(name="Мастер и Маргарита", author="Михаил Булгаков", pages=480),
     AudioBook(name="Гарри Поттер и философский камень", author="Джоан Роулинг", duration=8.5)
 ]
-
 
 for book in BOOK_DATABASE:
     print(str(book))
