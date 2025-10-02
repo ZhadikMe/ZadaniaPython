@@ -1,2 +1,2 @@
 # ZadaniaPython
-Задания Python на проверку
+Задания Python по курсам
